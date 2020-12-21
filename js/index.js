@@ -1,21 +1,21 @@
-const items = [{
-        id: 1,
-        name: "remera1",
-        price: "$700",
-    }, {
-        id: 2,
-        name: "remera2",
-        price: "$800",
-    }, {
-        id: 3,
-        name: "remera3",
-        price: "$900",
-    }];
+function Disenio (colorIng, nombreIng) {
+    this.nombre = nombreIng
+    this.color = colorIng;
 
-const mostrarProducto = () => {
-        let seleccion = prompt("qué diseño te gustaría ver?");
-        console.log('elegiste el producto ' + seleccion);
-    };
+    this.setPrecio = () => {
+        return precio;}
+    this.getId = () => {return id;}
+}
 
+const nombre = prompt("ingresá el nombre de tu diseño");
+const color = prompt("en qué color? blanco/negro");
 
-mostrarProducto();
+let remeraNueva = new Disenio(color, nombre);
+
+if (remeraNueva.color == "blanco") {
+    alert("remera publicada a $700")
+} else if (remeraNueva.color == "negro") {
+    alert("remera publicada a $800") 
+} else {
+    alert("hubo un problema, probablemente no elegiste ni blanco ni negro")
+};
