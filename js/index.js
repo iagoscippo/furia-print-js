@@ -1,10 +1,6 @@
 function RemeraNueva (colorIng, nombreIng) {
     this.nombre = nombreIng
     this.color = colorIng;
-    
-    this.setPrecio = () => {
-        return precio;}
-    this.getId = () => {return id;}
 }
 
 const nombre = prompt("ingresá el nombre de tu diseño");
