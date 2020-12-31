@@ -1,11 +1,32 @@
+window.onload = function () {
+    const boton = document.getElementById("boton");
+    boton.addEventListener("click", function(event){
+        const busqueda = document.getElementById("busqueda");
+        if(busqueda.value != "") {
+            let contenedor = document.createElement("div");
+            contenedor.setAttribute("class", "col s4");
+            contenedor.innerHTML = `
+                <h1>${busqueda.value}</h1>
+                <p>
+                $700 - blanca <br>
+                $900 - negra
+                </p>
+                <button onclick="eliminar(event)">descartar</button>
+            `;
+            document.getElementById("catalogo").appendChild(contenedor);
+        }
+    });
+}
+
+function eliminar(event) {
+    event.target.parentElement.parentElement.removeChild(event.target.parentElement);
+};
+
+
 function RemeraNueva (colorIng, nombreIng) {
     this.nombre = nombreIng
     this.color = colorIng;
 }
-
-const nombre = prompt("ingresá el nombre de tu diseño");
-const color = prompt("en qué color? blanco/negro");
-let remeraNueva = new RemeraNueva(color, nombre);
 const items = [{
     id: 1,
     nombre: "remera1",
@@ -22,23 +43,3 @@ const items = [{
     price: "$900",
     color: "negro"
 }]
-
-
-// desafio objetos
-if (remeraNueva.color == "blanco") {
-    alert("remera publicada a $700")
-} else if (remeraNueva.color == "negro") {
-    alert("remera publicada a $800") 
-} else {
-    alert("hubo un problema, probablemente no elegiste ni blanco ni negro")
-};
-
-//desafío arrays
-function consultarPrecio () {
-    let consulta = prompt("ingrese el id para consultar el precio")
-    let item = items[consulta - 1];
-    return item.precio;
-}
-
-let itemConsultado = consultarPrecio();
-alert(itemConsultado);
