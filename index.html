@@ -1,6 +1,4 @@
-<!-- tengo que desarrollar el carrito adaptado a que ahora no está dentro de ningún lado
-tengo que agregar las tarjetas con los objetos de los productos
-tengo que adaptar el js para que funcione el storage y el json, variables
+<!-- queda sumar el JS adaptado a este sitio
 -->
 
 <!DOCTYPE html>
@@ -54,19 +52,20 @@ tengo que adaptar el js para que funcione el storage y el json, variables
 
     <div id="catalogo" class="section container">
       <h3 class="center">catálogo</h3>
-      <form class="col s12">
+      <form class="col s12" id="filtro">
       <div class="input-field">
-        <input id="filtro" type="text" class="validate">
+        <input id="busqueda" type="text" class="validate">
         <label for="password">qué estás buscando?</label>
         <input type="submit" id="submit-filtro" class="submit">
       </div>
       </form>
+
       <div class="row">
        <div class="col s4">
         <div class="card">
           <div class="card-image">
             <img src="img/dragon ball z.jpg">
-            <a href="#" data-id="1" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            <a href="#" data-id="1" class="btn-floating halfway-fab waves-effect waves-light red agregar-carrito"><i class="material-icons">add</i></a>
           </div>
           <div class="card-content">
             <h5>dragon ball z</h5>
@@ -80,7 +79,7 @@ tengo que adaptar el js para que funcione el storage y el json, variables
         <div class="card">
           <div class="card-image">
             <img src="img/shingeki.jpg">
-            <a href="#" data-id="2" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            <a href="#" data-id="2" class="agregar-carrito btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
           </div>
           <div class="card-content">
             <h5>shingeki no kyojin</h5>
@@ -94,7 +93,7 @@ tengo que adaptar el js para que funcione el storage y el json, variables
         <div class="card">
           <div class="card-image">
             <img src="img/naruto.jpg">
-            <a href="#" data-id="3" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            <a href="#" data-id="3" class="agregar-carrito btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
           </div>
           <div class="card-content">
             <h5>naruto</h5>
@@ -110,7 +109,7 @@ tengo que adaptar el js para que funcione el storage y el json, variables
         <div class="card">
           <div class="card-image">
             <img src="img/dragon ball.jpg">
-            <a href="#" data-id="4" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            <a href="#" data-id="4" class="agregar-carrito btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
           </div>
           <div class="card-content">
             <h5>dragon ball</h5>
@@ -124,7 +123,7 @@ tengo que adaptar el js para que funcione el storage y el json, variables
         <div class="card">
           <div class="card-image">
             <img src="img/jojo.jpg">
-            <a href="#" data-id="4" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            <a href="#" data-id="5" class="agregar-carrito btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
           </div>
           <div class="card-content">
             <h5>jojo's</h5>
@@ -142,7 +141,7 @@ tengo que adaptar el js para que funcione el storage y el json, variables
     <script src="js/app.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script>
+    <script src="js/productos.js"></script>
     <script type="text/javascript">
           $(document).ready(function(){
     $('.sidenav').sidenav();

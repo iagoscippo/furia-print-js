@@ -1,37 +1,37 @@
-const stockProductos = [
+const stockRemeras = [
 	{
-		imagen: 'img/producto1.jpg',
-		nombre: 'Motherboard',
-		precio: '$15000',
-		vendedor: 'Juan Pedro',
+		img: './img/dragon ball z.jpg',
+		nombre: 'dragon ball z',
+		precio: '$700',
+		color: 'blanca',
 		id: 1
 	},
 	{
-		imagen: 'img/producto2.jpg',
-		nombre: 'Teclado',
-		precio: '$18000',
-		vendedor: 'Juan Pedro',
+		img: './img/shingeki.jpg',
+		nombre: 'shingeki no kyojin',
+		precio: '%700',
+		color: 'blanca',
 		id: 2
 	},
 	{
-		imagen: 'img/producto3.jpg',
-		nombre: 'Gabinete',
-		precio: '$12000',
-		vendedor: 'Juan Pedro',
+		img: './img/naruto.jpg',
+		nombre: 'naruto',
+		precio: '%700',
+		color: 'blanca',
 		id: 3
 	},
 	{
-		imagen: 'img/producto4.jpg',
-		nombre: 'Monitor',
-		precio: '$15000',
-		vendedor: 'Juan Pedro',
+		img: './img/dragon ball.jpg',
+		nombre: 'dragon ball',
+		precio: '%700',
+		color: 'blanca',
 		id: 4
 	},
 	{
-		imagen: 'img/producto5.jpg',
-		nombre: 'Placa de Video',
-		precio: '$15000',
-		vendedor: 'Juan Pedro',
+		img: './img/jojo.jpg',
+		nombre: "jojo's",
+		precio: '$800',
+		color: 'negra',
 		id: 5
 	}
 ]
