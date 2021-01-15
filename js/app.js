@@ -3,7 +3,7 @@ const carrito = document.querySelector('#carrito');
 const contenedorCarrito = document.querySelector('#lista-carrito tbody');
 const catalogo = document.querySelector('#catalogo');
 const btnVaciarCarrito = document.querySelector('#vaciar-carrito');
-const filtro = document.querySelector('#filtro');
+// const filtro = document.querySelector('#filtro');
 
 let articulosCarrito = [];
 
@@ -11,60 +11,62 @@ let articulosCarrito = [];
 catalogo.addEventListener('click', agregarProducto);
 carrito.addEventListener('click', quitarProducto);
 btnVaciarCarrito.addEventListener('click', vaciarCarrito);
-filtro.addEventListener('submit', filtrarProductos);
+//filtro.addEventListener('submit', filtrarProductos);
+$('#filtro').on('submit', filtrarProductos);
+
+
 document.addEventListener('DOMContentLoaded', () => {
+	cargarCatalogo(stockRemeras);
+	
 	articulosCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-	// if(articulosCarrito === null) {
-	// 	articulosCarrito = []
-	// }
 	insertarCarritoHTML();
 });
 
 /* Funciones */
-function filtrarProductos(e) {
-	e.preventDefault();
 
-	const busqueda = document.querySelector('#busqueda').value;
-
-	/* Busco en mi "BD" de productos */
-	const resultado = stockRemeras.filter(producto => producto.nombre.toLocaleLowerCase().includes(busqueda.toLocaleLowerCase()));
-
-	limpiarProductos();
-	resultado.forEach((producto, index) => {
-
-		const { nombre, img, precio, id, color } = producto;
-
+function cargarCatalogo(remeras) {
+	remeras.forEach((remera, index) => {
+		const {nombre, img, precio, color, id} = remera;
+		
 		const divCard = document.createElement('div');
-		divCard.classList.add('col s4');
+		divCard.classList.add('col', 's4');
 		divCard.innerHTML = `
 		<div class="card">
-          <div class="card-image">
-            <img src="${img}">
-            <a href="#" data-id="2" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-          </div>
-          <div class="card-content">
-            <h5>${nombre}</h5>
-            <p>${color}</p>
-            <p class="precio">${precio}</p>
-          </div>
-        </div>
+			<div class="card-image">
+				<img src="${img}">
+				<a href="#" data-id="${id}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+			</div>
+			<div class="card-content">
+				<h5>${nombre}</h5>
+				<p>${color}</p>
+				<p class="precio">${precio}</p>
+			</div>
+		</div>		
 		`
-		if (index % 3 === 0) {
+		if (index % 3 === 0 ) {
 			const row = document.createElement('div');
 			row.classList.add('row');
 
 			catalogo.appendChild(row);
 			row.appendChild(divCard);
 		} else {
-			const cantRows = document.querySelector('#catalogo').children.length
-			const rows = document.querySelectorAll('#catalogo .row');
-			const row = rows[cantRows - 1];
+			const row = document.querySelector('#catalogo .row:last-child');
 			row.appendChild(divCard);
 		}
 	})
-
 }
+
+function filtrarProductos(e) {
+	e.preventDefault();
+	const busqueda = $("#busqueda").val();
+	/* Busco en mi "BD" de productos */
+	const resultado = stockRemeras.filter(producto => producto.nombre.toLocaleLowerCase().includes(busqueda.toLocaleLowerCase()));
+
+	limpiarProductos();
+	cargarCatalogo(resultado);
+}
+
 
 function vaciarCarrito() {
 	limpiarCarrito();
@@ -72,23 +74,18 @@ function vaciarCarrito() {
 	guardarStorage();
 }
 
+
 function quitarProducto(e) {
 	if (e.target.classList.contains('borrar-producto')) {
 		const productoId = e.target.getAttribute('data-id');
-
-		/* Filtro los productos del carrito */
 		articulosCarrito = articulosCarrito.filter(producto => producto.id != productoId);
 
-		/* Renderizo el nuevo carrito */
 		insertarCarritoHTML();
-
-		/* Actualizamos el storage */
 		guardarStorage();
 	}
 }
 
 function agregarProducto(e) {
-	/* Evitamos la accion por defecto del enlace */
 	e.preventDefault();
 
 	if (e.target.classList.contains('agregar-carrito')) {
@@ -103,7 +100,7 @@ function obtenerDatos(producto) {
 
 	/* Extraer informacion del producto */
 	const productoAgregado = {
-		imagen: producto.querySelector('img').src,
+		img: producto.querySelector('img').src,
 		nombre: producto.querySelector('h5').textContent,
 		precio: producto.querySelector('.precio span').textContent,
 		id: producto.querySelector('a').getAttribute('data-id'),
@@ -146,10 +143,13 @@ function insertarCarritoHTML() {
 	articulosCarrito.forEach(producto => {
 
 		/* Destructuring sobre el producto */
-		const { color, nombre, precio, cantidad, id } = producto;
+		const { img, color, nombre, precio, cantidad, id } = producto;
 
 		const row = document.createElement('tr');
 		row.innerHTML = `
+			<td>
+				<img src="${img}" width=100>
+			</td>
 			<td>
 				${nombre}
 			</td>
