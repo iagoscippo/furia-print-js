@@ -3,7 +3,6 @@ const carrito = document.querySelector('#carrito');
 const contenedorCarrito = document.querySelector('#lista-carrito tbody');
 const catalogo = document.querySelector('#catalogo');
 const btnVaciarCarrito = document.querySelector('#vaciar-carrito');
-// const filtro = document.querySelector('#filtro');
 
 let articulosCarrito = [];
 
@@ -11,7 +10,6 @@ let articulosCarrito = [];
 catalogo.addEventListener('click', agregarProducto);
 carrito.addEventListener('click', quitarProducto);
 btnVaciarCarrito.addEventListener('click', vaciarCarrito);
-//filtro.addEventListener('submit', filtrarProductos);
 $('#filtro').on('submit', filtrarProductos);
 
 
@@ -35,7 +33,7 @@ function cargarCatalogo(remeras) {
 		<div class="card">
 			<div class="card-image">
 				<img src="${img}">
-				<a href="#" data-id="${id}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+				<a href="#" data-id="${id}" class="btn-floating halfway-fab waves-effect waves-light red button input agregar-carrito"><i class="material-icons">add</i></a>
 			</div>
 			<div class="card-content">
 				<h5>${nombre}</h5>
@@ -87,11 +85,9 @@ function quitarProducto(e) {
 
 function agregarProducto(e) {
 	e.preventDefault();
-
-	if (e.target.classList.contains('agregar-carrito')) {
+	if (e.target.parentElement.classList.contains('agregar-carrito')) {
 		/* Seleccionar el card del producto */
-		const productoSeleccionado = e.target.parentElement.parentElement;
-
+		const productoSeleccionado = e.target.parentElement.parentElement.parentElement;
 		obtenerDatos(productoSeleccionado);
 	}
 }
@@ -102,7 +98,7 @@ function obtenerDatos(producto) {
 	const productoAgregado = {
 		img: producto.querySelector('img').src,
 		nombre: producto.querySelector('h5').textContent,
-		precio: producto.querySelector('.precio span').textContent,
+		precio: producto.querySelector('.precio').textContent,
 		id: producto.querySelector('a').getAttribute('data-id'),
 		cantidad: 1
 	}
