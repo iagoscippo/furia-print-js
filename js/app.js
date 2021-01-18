@@ -79,9 +79,8 @@ function quitarProducto(e) {
 	if (e.target.classList.contains('borrar-producto')) {
 
 		const productoId = e.target.getAttribute('data-id');
-		const productoEliminado = articulosCarrito.filter(producto => producto.id == productoId)
-		
-		console.log(productoEliminado.cantidad.value);
+		const productoEliminado = articulosCarrito.filter(producto => producto.id == productoId)[0];
+
 		if (productoEliminado.cantidad == 1) {
 			articulosCarrito = articulosCarrito.filter(producto => producto.id != productoId);
 		} else if (productoEliminado.cantidad > 1) {
@@ -89,6 +88,7 @@ function quitarProducto(e) {
 			articulosCarrito = articulosCarrito.filter(producto => producto.id != productoId);
 			articulosCarrito.push(productoEliminado);
 		}
+		
 		insertarCarritoHTML();
 		guardarStorage();
 	}
