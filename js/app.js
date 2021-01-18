@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /* Funciones */
 
 function cargarCatalogo(remeras) {
+	$('#catalogo').hide();
 	remeras.forEach((remera, index) => {
 		const {nombre, img, precio, color, id} = remera;
 		
@@ -53,6 +54,7 @@ function cargarCatalogo(remeras) {
 			row.appendChild(divCard);
 		}
 	})
+	$('#catalogo').slideDown(1500);
 }
 
 function filtrarProductos(e) {
@@ -75,9 +77,18 @@ function vaciarCarrito() {
 
 function quitarProducto(e) {
 	if (e.target.classList.contains('borrar-producto')) {
-		const productoId = e.target.getAttribute('data-id');
-		articulosCarrito = articulosCarrito.filter(producto => producto.id != productoId);
 
+		const productoId = e.target.getAttribute('data-id');
+		const productoEliminado = articulosCarrito.filter(producto => producto.id == productoId)
+		
+		console.log(productoEliminado.cantidad.value);
+		if (productoEliminado.cantidad == 1) {
+			articulosCarrito = articulosCarrito.filter(producto => producto.id != productoId);
+		} else if (productoEliminado.cantidad > 1) {
+			productoEliminado.cantidad = productoEliminado.cantidad - 1;
+			articulosCarrito = articulosCarrito.filter(producto => producto.id != productoId);
+			articulosCarrito.push(productoEliminado);
+		}
 		insertarCarritoHTML();
 		guardarStorage();
 	}
@@ -118,7 +129,6 @@ function obtenerDatos(producto) {
 		});
 		articulosCarrito = [...productos];
 	} else {
-		/* Agrego el producto al carrito */
 		articulosCarrito.push(productoAgregado);
 	}
 
@@ -132,13 +142,10 @@ function guardarStorage() {
 
 function insertarCarritoHTML() {
 
-	/* Borrar contenido carrito */
 	limpiarCarrito();
-
 	/* Inserto los productos del carrito en el HTML */
 	articulosCarrito.forEach(producto => {
 
-		/* Destructuring sobre el producto */
 		const { img, color, nombre, precio, cantidad, id } = producto;
 
 		const row = document.createElement('tr');
